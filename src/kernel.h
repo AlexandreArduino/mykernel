@@ -6,6 +6,7 @@
 
 #include <stdint.h>
 #include "stivale2.h"
+#include "config.h"
 #include "hardware/IO.h"
 #include "hardware/COM.h"
 #include "hardware/pic.h"
