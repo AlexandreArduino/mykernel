@@ -6,6 +6,9 @@ This is my basic kernel :
     git clone https://github.com/AlexandreArduino/mykernel.git
     cd mykernel/
     python setup.py
+    or
+    chmod +x setup.sh
+    ./setup.sh
 
 Now, your folder mykernel/ has been replaced by the folder myos/
 
