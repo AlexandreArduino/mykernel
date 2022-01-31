@@ -50,7 +50,8 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     log.on();
     struct stivale2_struct_tag_modules *modules = (struct stivale2_struct_tag_modules*)stivale2_find_tag(bootloader_data, 0x4b6fe466aade04ce);
     limineModules.init(modules);
-    floader.init(0);
+    limineModules.load_all_modules();
+    floader.init();
     gdt_init();
     struct stivale2_struct_tag_memmap *memorymap_tag = (struct stivale2_struct_tag_memmap*)stivale2_find_tag(bootloader_data, STIVALE2_STRUCT_TAG_MEMMAP_ID);
     memory.init(memorymap_tag);
