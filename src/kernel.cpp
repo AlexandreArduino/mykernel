@@ -51,12 +51,12 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     struct stivale2_struct_tag_modules *modules = (struct stivale2_struct_tag_modules*)stivale2_find_tag(bootloader_data, 0x4b6fe466aade04ce);
     limineModules.init(modules);
     limineModules.load_all_modules();
-    floader.init();
     gdt_init();
     struct stivale2_struct_tag_memmap *memorymap_tag = (struct stivale2_struct_tag_memmap*)stivale2_find_tag(bootloader_data, STIVALE2_STRUCT_TAG_MEMMAP_ID);
     memory.init(memorymap_tag);
     memory.show_mmap_type();
     frameAllocator.init(memory.base, memory.size);
+    floader.init();
     cpu.dump_registers();
     setupIDT();
     struct stivale2_struct_tag_rsdp *rsdp_tag = (struct stivale2_struct_tag_rsdp*)stivale2_find_tag(bootloader_data, STIVALE2_STRUCT_TAG_RSDP_ID);
@@ -80,6 +80,7 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     pci.show_all_periph();
     framebuffer.drawChar(0, {100, 100}, WHITE);
     pit.show_time_since_boot();
+    framebuffer.drawChar('c', {10, 10}, WHITE);
     while(1) asm("hlt");
 }
 

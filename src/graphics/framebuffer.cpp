@@ -81,13 +81,17 @@ void Framebuffer::clear(struct RGB rgb)
 
 void Framebuffer::drawChar(char c, struct Position position, struct RGB rgb)
 {
-    /*uint8_t *ptr = (uint8_t*)floader.get_font(c);
-    for(uint8_t y = 0; y < 16; y++)
+    char* fontPtr = floader.get_font(c);
+    for (unsigned long y = position.y; y < position.y + 16; y++)
     {
-        for(uint8_t x = 0; x < 8; x++)
+        for (unsigned long x = position.x; x < position.x + 8; x++)
         {
-            if(*ptr & (0b10000000 >> (8 - x)) & 0xFF) this->set_pixel(this->raw_position({position.x + x, position.y + y}), rgb);
+            if ((*fontPtr & (0b10000000 >> (x - position.x))) > 0)
+            {
+                this->set_pixel(this->raw_position({x, y}), rgb);
+            }
+
         }
-        ptr++;
-    }*/
+        fontPtr++;
+    }
 }
