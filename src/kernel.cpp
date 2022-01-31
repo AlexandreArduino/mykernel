@@ -4,12 +4,20 @@
 
 char kernel_stack[STACK_SIZE];
 
+struct stivale2_struct_tag_modules modules {
+    .tag = 
+    {
+        .identifier = 0x4b6fe466aade04ce,
+        .next = (uintptr_t)&rsdp_tag
+    }
+};
+
 static struct stivale2_struct_tag_memmap memorymap_tag
 {
     .tag =
     {
         .identifier = STIVALE2_STRUCT_TAG_MEMMAP_ID,
-        .next = (uintptr_t)&rsdp_tag
+        .next = (uintptr_t)&modules
     }
 };
 
@@ -40,6 +48,8 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     framebuffer.clear();
     com.init(COM1);
     log.on();
+    struct stivale2_struct_tag_modules *modules = (struct stivale2_struct_tag_modules*)stivale2_find_tag(bootloader_data, 0x4b6fe466aade04ce);
+    limineModules.init(modules);
     floader.init(0);
     gdt_init();
     struct stivale2_struct_tag_memmap *memorymap_tag = (struct stivale2_struct_tag_memmap*)stivale2_find_tag(bootloader_data, STIVALE2_STRUCT_TAG_MEMMAP_ID);

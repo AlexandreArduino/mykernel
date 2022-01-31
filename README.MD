@@ -6,7 +6,7 @@ This is my basic kernel :
     git clone https://github.com/AlexandreArduino/mykernel.git
     cd mykernel/
     python setup.py
-    or
+or
     chmod +x setup.sh
     ./setup.sh
 
