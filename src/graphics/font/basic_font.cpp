@@ -33,8 +33,3 @@ uint16_t fontLoader::get_file_size()
 {
 	return limineModules.get_psf_font_end() - limineModules.get_psf_font_start();
 }
-
-char *fontLoader::get_font(char c)
-{
-	return (char*)(this->font->glyph[0] + (c * this->font->charsize));
-}

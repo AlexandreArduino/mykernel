@@ -9,7 +9,6 @@ class fontLoader
 {
 public:
 	void init();
-	char *get_font(char c);
 	PSF::font *font;
 private:
 	bool isFileSizeCorrect(uint16_t size);

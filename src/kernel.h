@@ -36,6 +36,8 @@
 #include "exceptions/panic.h"
 #include "graphics/font/basic_font.h"
 #include "graphics/framebuffer.h"
+#include "graphics/screen.h"
+#include "graphics/textcursor.h"
 #include "debug/log.h"
 #include "debug/maths/primenumbers_test.h"
 #include "debug/memory/loop.h"

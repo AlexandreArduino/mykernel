@@ -57,6 +57,7 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     memory.show_mmap_type();
     frameAllocator.init(memory.base, memory.size);
     floader.init();
+    screen.init();
     cpu.dump_registers();
     setupIDT();
     struct stivale2_struct_tag_rsdp *rsdp_tag = (struct stivale2_struct_tag_rsdp*)stivale2_find_tag(bootloader_data, STIVALE2_STRUCT_TAG_RSDP_ID);
@@ -81,8 +82,7 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     framebuffer.clear();
     pci.show_all_periph();
     pit.show_time_since_boot();
-    framebuffer.drawChar('g', {0, 0}, WHITE);
-
+    screen.print("Hello World!", {0, 0}, WHITE);
     while(1) asm("hlt");
 }
 

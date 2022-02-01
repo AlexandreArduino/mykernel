@@ -1,5 +1,8 @@
 #pragma once
 
+#define DEFAULT_PSF_WIDTH 8
+#define DEFAULT_PSF_HEIGHT 16
+
 namespace PSF
 {
     struct header

@@ -81,19 +81,32 @@ void Framebuffer::clear(struct RGB rgb)
 
 void Framebuffer::drawChar(char c, struct Position position, struct RGB rgb)
 {
-    /*for(int i = 0; i < 16; i++)
+    for(uint8_t y = 0; y < DEFAULT_PSF_HEIGHT; y++)
     {
-        for(int x = 0; x < 8; x++)
+        for(uint8_t x = 0; x < DEFAULT_PSF_WIDTH; x++)
         {
-            if((floader.font->glyph[i] & (0b10000000 >> x)) > 0) framebuffer.set_pixel({x, i}, WHITE);
-        }
-    }*/
-    for(uint8_t y = 0; y < 16; y++)
-    {
-        for(uint8_t x = 0; x < 8; x++)
-        {
-            if(floader.font->glyph[c * 16 + y] & (0b10000000 >> x)) framebuffer.set_pixel((struct Position){position.x + x, position.y + y}, rgb);
+            if(floader.font->glyph[c * DEFAULT_PSF_HEIGHT + y] & (0b10000000 >> x)) framebuffer.set_pixel((struct Position){position.x + x, position.y + y}, rgb);
         }
     }
-    com.writeln("done");
+}
+
+void Framebuffer::drawChar(char c, size_t raw_position, struct RGB rgb)
+{
+    for(uint8_t y = 0; y < DEFAULT_PSF_HEIGHT; y++)
+    {
+        for(uint8_t x = 0; x < DEFAULT_PSF_WIDTH; x++)
+        {
+            if(floader.font->glyph[c * DEFAULT_PSF_HEIGHT + y] & (0b10000000 >> x)) framebuffer.set_pixel(raw_position + y * DEFAULT_PSF_WIDTH + x, rgb);
+        }
+    }
+}
+
+uint16_t Framebuffer::width()
+{
+    return this->tag->framebuffer_width;
+}
+
+uint16_t Framebuffer::height()
+{
+    return this->tag->framebuffer_height;
 }

@@ -48,8 +48,11 @@ public:
     void clear();
     void clear(struct RGB rgb);
     void drawChar(char c, struct Position position, struct RGB rgb);
+    void drawChar(char c, size_t raw_position, struct RGB rgb);
     struct RGB get_pixel(struct Position position);
     struct RGB get_pixel(size_t raw_position);
+    uint16_t width();
+    uint16_t height();
 private:
     struct framebuffer_pixel *buffer;
     struct stivale2_struct_tag_framebuffer *tag;
