@@ -74,13 +74,15 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     log.logln("_start", "Running tests functions...");
     Tests::_framebuffer();
     Tests::primenumbers_examples();
+    Tests::sample_loop(16);
+    Tests::drawChar();
     #endif
     keyboard.enable();
     framebuffer.clear();
     pci.show_all_periph();
-    framebuffer.drawChar(0, {100, 100}, WHITE);
     pit.show_time_since_boot();
-    framebuffer.drawChar('c', {10, 10}, WHITE);
+    framebuffer.drawChar('g', {0, 0}, WHITE);
+
     while(1) asm("hlt");
 }
 

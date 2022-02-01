@@ -11,7 +11,9 @@ namespace PSF
     
     struct font
     {
-        struct header* psf1_Header;
-        void* glyphBuffer;
+        unsigned char magic[2];
+        unsigned char mode;
+        unsigned char charsize;
+        char glyph[];
     }__attribute__((packed));
 }

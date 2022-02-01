@@ -4,6 +4,5 @@
 
 namespace Tests
 {
-    void _framebuffer();
-    void drawChar();
+    void sample_loop(int value);
 }

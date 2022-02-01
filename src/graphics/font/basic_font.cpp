@@ -16,8 +16,10 @@ void fontLoader::init()
 	this->font = (PSF::font*)limineModules.get_psf_font_start();
 	log.logln("fontLoader::init", "Copying file in usable memory...");
 	uint8_t pages = (this->get_file_size() / 4096) + 1;
-	this->font = (PSF::font*)frameAllocator.alloc(pages);
+	uint64_t *space_allocated = (uint64_t*)frameAllocator.alloc(pages);
+	memcpy((void*)space_allocated, (void*)(uint64_t*)limineModules.get_psf_font_start(), ZAP_LIGHT_FILE_SIZE);
 	log.log("fontLoader::init", "The file is now at 0x");
+	this->font = (PSF::font*)space_allocated;
 	log.logln(String((uint64_t)this->font, HEXADECIMAL));
 }
 
@@ -34,5 +36,5 @@ uint16_t fontLoader::get_file_size()
 
 char *fontLoader::get_font(char c)
 {
-	return (char*)this->font->glyphBuffer + (c * this->font->psf1_Header->charsize);
+	return (char*)(this->font->glyph[0] + (c * this->font->charsize));
 }

@@ -11,3 +11,15 @@ void Tests::_framebuffer()
         }
     }
 }
+
+void Tests::drawChar()
+{
+    for(int i = 0; i < 16; i++)
+    {
+        log.logln("Tests::drawChar", String(floader.font->glyph[i], BINARY));
+        for(int x = 0; x < 8; x++)
+        {
+            if((floader.font->glyph[i] & (0b10000000 >> x)) > 0) framebuffer.set_pixel({x, i}, WHITE);
+        }
+    }
+}

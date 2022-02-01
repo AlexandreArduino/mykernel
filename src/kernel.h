@@ -38,6 +38,7 @@
 #include "graphics/framebuffer.h"
 #include "debug/log.h"
 #include "debug/maths/primenumbers_test.h"
+#include "debug/memory/loop.h"
 
 #ifdef TEST
 #include "debug/graphics/framebuffer_test.h"

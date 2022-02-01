@@ -81,17 +81,19 @@ void Framebuffer::clear(struct RGB rgb)
 
 void Framebuffer::drawChar(char c, struct Position position, struct RGB rgb)
 {
-    char* fontPtr = floader.get_font(c);
-    for (unsigned long y = position.y; y < position.y + 16; y++)
+    /*for(int i = 0; i < 16; i++)
     {
-        for (unsigned long x = position.x; x < position.x + 8; x++)
+        for(int x = 0; x < 8; x++)
         {
-            if ((*fontPtr & (0b10000000 >> (x - position.x))) > 0)
-            {
-                this->set_pixel(this->raw_position({x, y}), rgb);
-            }
-
+            if((floader.font->glyph[i] & (0b10000000 >> x)) > 0) framebuffer.set_pixel({x, i}, WHITE);
         }
-        fontPtr++;
+    }*/
+    for(uint8_t y = 0; y < 16; y++)
+    {
+        for(uint8_t x = 0; x < 8; x++)
+        {
+            if(floader.font->glyph[c * 16 + y] & (0b10000000 >> x)) framebuffer.set_pixel((struct Position){position.x + x, position.y + y}, rgb);
+        }
     }
+    com.writeln("done");
 }
