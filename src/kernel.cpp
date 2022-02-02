@@ -82,7 +82,6 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     framebuffer.clear();
     pci.show_all_periph();
     pit.show_time_since_boot();
-    screen.print("Hello World!", {0, 0}, WHITE);
     while(1) asm("hlt");
 }
 

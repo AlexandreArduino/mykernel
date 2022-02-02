@@ -1,9 +1,5 @@
 #pragma once
 
-#define WIDTH 1440
-#define HEIGHT 900
-#define TEST 1
-
 #include <stdint.h>
 #include "stivale2.h"
 #include "config.h"
