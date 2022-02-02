@@ -18,6 +18,35 @@ struct segment
     uint8_t high_base;
 }__attribute__((packed));
 
+struct tss
+{
+    uint8_t reserved1 : 4;
+    uint8_t rsp0_low : 4;
+    uint8_t rsp0_high : 4;
+    uint8_t rsp1_low : 4;
+    uint8_t rsp1_high : 4;
+    uint8_t rsp2_low : 4;
+    uint8_t rsp2_high : 4;
+    uint8_t reserved2;
+    uint8_t ist1_low : 4;
+    uint8_t ist1_high : 4;
+    uint8_t ist2_low : 4;
+    uint8_t ist2_high : 4;
+    uint8_t ist3_low : 4;
+    uint8_t ist3_high : 4;
+    uint8_t ist4_low : 4;
+    uint8_t ist4_high : 4;
+    uint8_t ist5_low : 4;
+    uint8_t ist5_high : 4;
+    uint8_t ist6_low : 4;
+    uint8_t ist6_high : 4;
+    uint8_t ist7_low : 4;
+    uint8_t ist7_high : 4;
+    uint8_t reserved3;
+    uint8_t reserved4 : 4;
+    uint8_t iopb_offset : 4;
+}__attribute__((packed));
+
 struct GDT
 {
     struct segment knull;
