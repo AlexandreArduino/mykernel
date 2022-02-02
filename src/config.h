@@ -4,6 +4,6 @@
 #define HARDWARE 0
 #define WIDTH 1440
 #define HEIGHT 900
-#define TEST 1
+#define TEST 0
 
 #endif

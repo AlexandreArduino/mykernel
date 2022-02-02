@@ -60,27 +60,34 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     screen.init();
     cpu.dump_registers();
     setupIDT();
+    screen.println("Interrupts are ready!");
     struct stivale2_struct_tag_rsdp *rsdp_tag = (struct stivale2_struct_tag_rsdp*)stivale2_find_tag(bootloader_data, STIVALE2_STRUCT_TAG_RSDP_ID);
     acpi.init((uint64_t*)rsdp_tag->rsdp);
+    screen.println("ACPI done");
     pit.init(1000);
+    screen.println("PIT done");
     allocator.init(1000000);
+    screen.println("memory allocator done");
     keyboard.init(QWERTY);
     keyboard.disable();
+    screen.println("keyboard done");
     cpu.show_vendor();
     cmos.init();
     cmos.read();
     rtc.init();
     rtc.show_date();
-    #ifdef TEST
+    screen.println("cpu cmos rtc done");
+    #if TEST == 1
     log.logln("_start", "Running tests functions...");
     Tests::_framebuffer();
     Tests::primenumbers_examples();
     Tests::sample_loop(16);
     Tests::drawChar();
+    framebuffer.clear();
     #endif
     keyboard.enable();
-    framebuffer.clear();
     pci.show_all_periph();
+    screen.println("pci done");
     pit.show_time_since_boot();
     while(1) asm("hlt");
 }

@@ -31,6 +31,7 @@ void KeyboardDriver::handle(uint8_t code)
     if(this->state)
     {
         com.write(this->disposition[code]);
+        screen.print((char*)this->disposition[code]);
     }
 }
 
