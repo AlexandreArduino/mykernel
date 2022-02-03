@@ -9,6 +9,7 @@ class Scheduler
 {
 public:
     void init();
+    bool create(void (*handler)());
 private:
     struct Task *tasks[TASKS_NUMBER];
     uint8_t number_of_tasks;

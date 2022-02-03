@@ -9,7 +9,7 @@ https://www.youtube.com/watch?v=Rj0L3bI1cR4
     git clone https://github.com/AlexandreArduino/mykernel.git
     cd mykernel/
     python setup.py
-or
+# or
     chmod +x setup.sh
     ./setup.sh
 

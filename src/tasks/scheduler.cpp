@@ -21,8 +21,26 @@ void Scheduler::init()
     }
 
     // Create the first void task
+    uint8_t *ptr = (uint8_t*)frameAllocator.alloc(1);
+    this->tasks[0]->init(this->number_of_tasks, ptr, default_task, this->tasks[0]);
 
-    this->tasks[0]->init(0, (char*)frameAllocator.alloc(1), default_task, this->tasks[0]);
+    this->number_of_tasks++;
 
     screen.println("scheduler init");
+}
+
+bool Scheduler::create(void (*handler)())
+{
+    if(this->number_of_tasks > TASKS_NUMBER)
+    {
+        log.log("Scheduler::create", "Cannot create more than ");
+        log.logln(String(TASKS_NUMBER, DECIMAL), " tasks!");
+        return false;
+    }
+    uint8_t* ptr = (uint8_t*)frameAllocator.alloc(1);
+    screen.println(String((uint64_t)ptr, HEXADECIMAL));
+    this->tasks[this->number_of_tasks]->init(this->number_of_tasks, (uint8_t*)frameAllocator.alloc(1), handler, this->tasks[0]);
+    this->tasks[this->number_of_tasks - 1]->next = this->tasks[this->number_of_tasks];
+    this->number_of_tasks++;
+    return true;
 }
