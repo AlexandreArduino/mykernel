@@ -7,7 +7,7 @@ extern "C" void DivisionByZero()
 
 extern "C" void PageFaultHandler()
 {
-    Exceptions::panic("Page Fault detected!");
+    screen.println("page fault detected!");
 }
 
 extern "C" void DoubleFaultHandler()

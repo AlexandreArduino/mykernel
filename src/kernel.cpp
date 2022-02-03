@@ -88,6 +88,7 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     keyboard.enable();
     pci.show_all_periph();
     screen.println("pci done");
+    scheduler.init();
     pit.show_time_since_boot();
     while(1) asm("hlt");
 }

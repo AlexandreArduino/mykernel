@@ -2,6 +2,7 @@
 
 __attribute__((aligned(0x1000)))
 struct GDT gdt;
+struct TSS tss;
 
 GDTR gdtr;
 void gdt_init()

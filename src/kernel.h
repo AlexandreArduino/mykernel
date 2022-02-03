@@ -37,6 +37,7 @@
 #include "debug/log.h"
 #include "debug/maths/primenumbers_test.h"
 #include "debug/memory/loop.h"
+#include "tasks/scheduler.h"
 
 #ifdef TEST
 #include "debug/graphics/framebuffer_test.h"

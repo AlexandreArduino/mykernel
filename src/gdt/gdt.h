@@ -18,7 +18,7 @@ struct segment
     uint8_t high_base;
 }__attribute__((packed));
 
-struct tss
+struct TSS
 {
     uint8_t reserved1 : 4;
     uint8_t rsp0_low : 4;
@@ -61,4 +61,5 @@ __attribute__((aligned(0x1000)))
 void gdt_init();
 
 extern GDT gdt;
+extern struct TSS tss;
 extern "C" void load(GDTR *gdtr);
