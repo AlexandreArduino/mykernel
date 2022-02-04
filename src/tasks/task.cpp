@@ -26,7 +26,7 @@ void show_task_info(struct Task *task)
 {
     log.logln("show_task_info", "Task created : ");
     log.logln("ID :", String(task->id, DECIMAL));
-    log.logln("Stack : 0x", String((uint64_t)task->stack, HEXADECIMAL));
+    log.logln("Stack : 0x", String((uint64_t)task->stack[0], HEXADECIMAL));
     log.logln("Handle function 0x", String((uint64_t)(uint64_t*)task->entry, HEXADECIMAL));
     log.logln("Next task : 0x", String((uint64_t)task->next, HEXADECIMAL));
 }

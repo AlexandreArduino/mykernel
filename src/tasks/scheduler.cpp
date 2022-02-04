@@ -26,6 +26,8 @@ void Scheduler::init()
 
     this->number_of_tasks++;
 
+    this->current_task = this->tasks[0];
+
     screen.println("scheduler init");
 }
 
@@ -37,10 +39,15 @@ bool Scheduler::create(void (*handler)())
         log.logln(String(TASKS_NUMBER, DECIMAL), " tasks!");
         return false;
     }
-    uint8_t* ptr = (uint8_t*)frameAllocator.alloc(1);
-    screen.println(String((uint64_t)ptr, HEXADECIMAL));
     this->tasks[this->number_of_tasks]->init(this->number_of_tasks, (uint8_t*)frameAllocator.alloc(1), handler, this->tasks[0]);
+    this->tasks[this->number_of_tasks]->next = this->tasks[0];
     this->tasks[this->number_of_tasks - 1]->next = this->tasks[this->number_of_tasks];
     this->number_of_tasks++;
     return true;
+}
+
+void Scheduler::switch_task()
+{
+    log.logln("Scheduler::switch_task", "Switching task :)");
+    this->current_task = this->current_task->next;
 }

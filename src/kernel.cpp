@@ -68,6 +68,7 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     screen.println("PIT done");
     allocator.init(1000000);
     screen.println("memory allocator done");
+    scheduler.init();
     keyboard.init(QWERTY);
     keyboard.disable();
     screen.println("keyboard done");
@@ -88,9 +89,6 @@ extern "C" void _start(struct stivale2_struct *bootloader_data)
     keyboard.enable();
     pci.show_all_periph();
     screen.println("pci done");
-    scheduler.init();
-    scheduler.create(default_task);
-    scheduler.create(default_task);
     pit.show_time_since_boot();
     while(1) asm("hlt");
 }

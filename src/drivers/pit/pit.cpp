@@ -33,6 +33,7 @@ void PIT::handler()
             }
         }
     }
+    if(!(this->tick % 1000)) scheduler.switch_task();
 }
 
 void PIT::sleep(uint16_t n)
